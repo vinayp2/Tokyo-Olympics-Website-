@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <title>Tokyo Olympics</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ </head>
+<body>
+  <%- include('./partials/nav.ejs') %>
+  <div class="card">
+    <div class="card-body">
+      <h2>Create your account</h2>
+        <form action="mark" method="POST">
+          <div class="form-group">
+            <label for="login">Login</label>
+            <input type="text" class="form-control col-lg-9" id="login" aria-describedby="login" placeholder="Enter Login" name="login">
+            <label for="password">Password</label>
+            <input type="text" class="form-control col-lg-9" id="password" aria-describedby="password" placeholder="Enter Password" name="password">
+            <label for="about">About</label>
+            <input type="text" class="form-control col-lg-9" id="about" aria-describedby="about" placeholder="Enter About" name="about">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h2>Delete your account</h2>
+        <form action="mark2" method="POST">
+          <div class="form-group">
+            <label for="login2">Login</label>
+            <input type="text" class="form-control col-lg-9" id="login2" aria-describedby="login2" placeholder="Enter Login" name="login2">
+            <label for="password2">Password</label>
+            <input type="text" class="form-control col-lg-9" id="password2" aria-describedby="password2" placeholder="Enter Password" name="password2">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div
+  </div>
+
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h2>Update your About</h2>
+        <form action="mark3" method="POST">
+          <div class="form-group">
+            <label for="login3">Login</label>
+            <input type="text" class="form-control col-lg-9" id="login3" aria-describedby="login3" placeholder="Enter Login" name="login3">
+            <label for="password3">Password</label>
+            <input type="text" class="form-control col-lg-9" id="password3" aria-describedby="password3" placeholder="Enter Password" name="password3">
+            <label for="about3">About</label>
+            <input type="text" class="form-control col-lg-9" id="about3" aria-describedby="about3" placeholder="Update About" name="about3">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+  </div>
+
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h2>Update your Password</h2>
+        <form action="mark8" method="POST">
+          <div class="form-group">
+            <label for="login4">Login</label>
+            <input type="text" class="form-control col-lg-9" id="login4" aria-describedby="login4" placeholder="Enter Login" name="login4">
+            <label for="password4">Password</label>
+            <input type="text" class="form-control col-lg-9" id="password4" aria-describedby="password4" placeholder="Enter Password" name="password4">
+            <label for="new4">New Password</label>
+            <input type="text" class="form-control col-lg-9" id="new4" aria-describedby="new4" placeholder="New Password" name="new4">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+  </div>
+
+</body>
+
+</html>

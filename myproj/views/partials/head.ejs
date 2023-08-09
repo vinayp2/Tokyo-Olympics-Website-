@@ -1,0 +1,151 @@
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<div class="container">
+    <div class="row my-3">
+        <div class="col">
+            <h1>Medals Won By Top 10 Countries</h1>
+        </div>
+    </div>
+<div class="row py-3">
+        <div class="col-xl-12 py-2">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut1"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="row py-3">
+        <div class="col-xl-12 py-2">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col-xl-12 py-2">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut3"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	/* chart.js chart examples */
+
+// chart colors
+var colors = ["#F70404","#F8671E","#4A235A","#154360","#3498DB","#0E6251","#45B39D","#F4D03F","#BA4A00","#424949","#000000"];
+const gold = [];
+const silver = [];
+const bronze = [];
+var countries = []; 
+var topush1 = "";
+var topush = ""; 
+console.log(<% result %>)
+<% if (result.length > 0 ) { %>
+        <% result.forEach(res => { %>
+                gold.push(<%= res.Gold_Medal %>);
+                silver.push(<%= res.Silver_Medal %>);
+                bronze.push(<%= res.Bronze_Medal %>);
+		topush1 = "<%- res.Country %>";
+		
+		countries.push(topush1);
+        <% }) %>
+<% } %>
+/* 3 donut charts */
+var donutOptions1 = {
+  cutoutPercentage: 85, 
+  legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}},
+  title: {
+        display: true,
+        text: "Gold Medals"
+  }
+};
+var donutOptions2 = {
+  cutoutPercentage: 85,
+  legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}},
+  title: {
+        display: true,
+        text: "Silver Medals"
+  }
+};
+var donutOptions3 = {
+  cutoutPercentage: 85,
+  legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}},
+  title: {
+        display: true,
+        text: "Bronze Medals"
+  }
+};
+// donut 1
+var chDonutData1 = {
+    labels: countries,
+       
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,10),
+        borderWidth: 0,
+	data: gold
+	     
+      }
+    ]
+};
+
+var chDonut1 = document.getElementById("chDonut1");
+if (chDonut1) {
+  new Chart(chDonut1, {
+      type: 'pie',
+      data: chDonutData1,
+      options: donutOptions1
+  });
+}
+
+// donut 2
+var chDonutData2 = {
+  	labels: countries,
+     datasets: [
+      {
+        backgroundColor: colors.slice(0,10),
+        borderWidth: 0,
+        data: silver
+      }
+    ]
+};
+var chDonut2 = document.getElementById("chDonut2");
+if (chDonut2) {
+  new Chart(chDonut2, {
+      type: 'pie',
+      data: chDonutData2,
+      options: donutOptions2
+  });
+}
+
+// donut 3
+var chDonutData3 = {
+    labels: countries,
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,10),
+        borderWidth: 0,
+        data: bronze
+      }
+    ]
+};
+var chDonut3 = document.getElementById("chDonut3");
+if (chDonut3) {
+  new Chart(chDonut3, {
+      type: 'pie',
+      data: chDonutData3,
+      options: donutOptions3
+  });
+}
+
+</script>
+
+
+

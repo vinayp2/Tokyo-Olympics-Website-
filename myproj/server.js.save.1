@@ -1,0 +1,155 @@
+
+var express = require('express');
+var bodyParser = require('body-parser');
+var mysql = require('mysql2');
+var path = require('path');
+var connection = mysql.createConnection({
+                host: '34.69.147.26',
+                user: 'root',
+                password: 'team024',
+                database: 'tokyoOlympics'
+});
+
+connection.connect;
+
+
+var app = express();
+
+// set up ejs view engine 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+ 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(__dirname + '../public'));
+
+/* GET home page, respond by rendering index.ejs */
+app.get('/', function(req, res) {
+  res.render('index', { title: 'Tokyo Olympics' });
+});
+app.get('/login', function(req, res) {
+  res.render('login', { title: 'User Login Page' });
+});
+app.get('/successUsers', function(req, res) {
+      res.send({'message': 'Action performed successfully!'});
+	setTimeout(function(){		res.redirect('/login');
+	},3000);	
+});
+app.get('/success', function(req, res) {
+      res.send({'message': 'Action performed successfully!'});
+});
+// this code is executed when a user clicks the form submit button
+app.post('/mark', function(req, res) {
+  var login = req.body.login;
+  var about = req.body.about;
+  var password = req.body.password;
+  var sql = `INSERT INTO Users (Login, Password, About) VALUES 
+('${login}','${password}','${about}')`;
+
+
+
+console.log(sql);
+  connection.query(sql, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.redirect('/successUsers');
+  });
+});
+
+
+app.post('/mark2', function(req, res) {
+  var login2 = req.body.login2;
+  var password2 = req.body.password2;
+  var sql2 = `DELETE FROM Users WHERE '${login2}' = Login AND '${password2}' = Password`;
+
+
+
+console.log(sql2);
+  connection.query(sql2, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.redirect('/successUsers');
+  });
+});
+
+app.post('/mark3', function(req, res) {
+  var login3 = req.body.login3;
+  var about3 = req.body.about3;
+  var password3 = req.body.password3;
+  var sql3 = `UPDATE Users SET About = '${about3}' WHERE '${login3}' = Login AND '${password3}' = Password`;
+
+
+
+console.log(sql3);
+  connection.query(sql3, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.redirect('/successUsers');
+  });
+});
+
+app.post('/mark4', function(req, res) {
+var sql4 = 'SELECT Medals.athlete_name, Athlete.birth_place, Athlete.birth_country FROM Medals JOIN Athlete on Medals.athlete_name = Athlete.name WHERE Medals.medal_Type = "Gold Medal" UNION SELECT Medals.athlete_name, Athlete.birth_place, Athlete.birth_country FROM Medals JOIN Athlete on Medals.athlete_name = Athlete.name WHERE Medals.medal_Type = "Silver Medal" UNION SELECT Medals.athlete_name, Athlete.birth_place, Athlete.birth_country FROM Medals JOIN Athlete on Medals.athlete_name = Athlete.name WHERE Medals.medal_Type = "Bronze Medal"';
+console.log(sql4);
+  connection.query(sql4, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.send(result);
+  });
+});
+
+app.post('/mark5', function(req, res) {
+var sql5 = 'SELECT a.name ,a.discipline, COUNT(*) as PopularityScore FROM Athlete a JOIN (SELECT * FROM YoutubeTrending WHERE likes > dislikes) as temp ON (temp.title LIKE CONCAT("%", SUBSTRING_INDEX(a.name," ",1), "%") AND temp.title LIKE CONCAT("%", SUBSTRING_INDEX(a.name," ",-1), "%")) WHERE a.country_code = "USA" GROUP BY a.name, a.discipline ORDER BY COUNT(*) DESC';
+
+console.log(sql5);
+  connection.query(sql5, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.send(result);
+  });
+});
+app.post('/mark6', function(req, res) {
+var athlete = req.body.athlete;
+var sql6 = `SELECT athlete_name,discipline,event,medal_type FROM Medals WHERE (athlete_name LIKE CONCAT("%", SUBSTRING_INDEX("${athlete}"," ",1), "%")) AND (athlete_name LIKE CONCAT("%", SUBSTRING_INDEX("${athlete}"," ",-1), "%"))`;
+console.log(sql6);
+  connection.query(sql6, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.send(result);
+  });
+});
+app.post('/mark7', function(req, res) {
+
+var sql7 = `SELECT Login,About FROM Users`;
+console.log(sql7);
+  connection.query(sql7, function(err, result) {
+    if (err) {
+      res.send(err)
+      return;
+    }
+    res.send(result);
+  });
+});
+app.use((req,res) => {
+	res.sendFile('./views/404.html',{root:__dirname});
+});
+app.listen(80, function () {
+    console.log('Node app is running on port 80');
+});
+
+
+
+
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <title>Top Athletes</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ </head>
+ <body>
+   <%- include('./partials/nav.ejs') %>
+
+  <div class="container">
+    <h2>Top Athletes by Country</h2>
+    <p>Displays the highest performing athletes by country.</p>            
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Place of birth</th>
+          <th>Country</th>
+          <th>Medal Yype</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (result.length > 0) {%>
+    <% result.forEach(res => { %>
+             <tr>
+            <td><%= res.athlete_name %></td>
+            <td><%= res.birth_place%></td>
+            <td><%= res.birth_country %></td>
+            <td><%= res.medal_type %></td>
+         </tr>
+    <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+

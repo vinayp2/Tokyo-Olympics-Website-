@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <title>Top Athletes</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ </head>
+ <body>
+   <%- include('./partials/nav.ejs') %>
+  <div class="container">
+    <h2>Popular Athletes in USA</h2>
+    <p>Displays the latest trending athletes from the USA</p>            
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Discipline</th>
+          <th>Popularity Tier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (result[0].length > 0) {%>
+    <% result[0].forEach(res => { %>
+             <tr>
+            <td><%= res.Name %></td>
+            <td><%= res.Discipline %></td>
+            <td><%= res.PopularityTier %></td>
+         </tr>
+    <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+
+</body>

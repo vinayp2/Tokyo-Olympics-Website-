@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <title>Top Athletes</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ </head>
+ <body>
+   <%- include('./partials/nav.ejs') %>
+	<div class="card">
+       <div class="card-body">
+         <h2>Input Athlete Name to see Medals won</h2>
+         <form action="search" method="GET">
+           <div class="form-group">
+             <label for="athlete">Athlete's Name</label>
+             <input type="text" class="form-control col-lg-9" id="athlete" aria-describedby="athlete" placeholder="Athlete's Name" name="athlete">
+           </div>
+           <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+</div>
+
+<div class="container">
+    <p>Results:</p>            
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Sport</th>
+          <th>Event</th>
+          <th>Medal Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (result.length > 0) {%>
+    <% result.forEach(res => { %>
+             <tr>
+            <td><%= res.athlete_name %></td>
+            <td><%= res.discipline%></td>
+            <td><%= res.event%></td>
+            <td><%= res.medal_type %></td>
+         </tr>
+    <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+</body>

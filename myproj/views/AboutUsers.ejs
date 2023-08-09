@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</style>
+   <title>Tokyo Olympics</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<%- include ./partials/nav.ejs %>
+
+<div class="container">
+  <h2>Tokyo Olympics Winners!</h2>
+  <p>Displays winners and the medals that they won</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Login</th>
+        <th>About</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (result.length > 0) {%>
+	<% result.forEach(res => { %>
+           <tr>
+        	<td><%= res.Login %></td>
+        	<td><%= res.About %></td>
+  	   </tr>
+	<% }) %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+</body>
+
+
+</html>
